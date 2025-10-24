@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalyst 2025 - Initialize Revolution</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Cursor Spotlight Effect */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(120, 81, 222, 0.15) 0%, transparent 25%);
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-strong {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-alt {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Glitch effect on Heading */
+        .glitch {
+            position: relative;
+            animation: glitch-anim 3s infinite steps(2, end);
+        }
+        .glitch::before, .glitch::after {
+            content: 'CATALYST';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-2 3s infinite steps(2, end) reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+            clip: rect(85px, 450px, 90px, 0);
+            animation: glitch-anim-2 3s infinite steps(2, end);
+        }
+
+        @keyframes glitch-anim {
+          0% { clip: rect(42px, 9999px, 44px, 0); }
+          5% { clip: rect(12px, 9999px, 69px, 0); }
+          10% { clip: rect(83px, 9999px, 33px, 0); }
+          15% { clip: rect(2px, 9999px, 7px, 0); }
+          20% { clip: rect(42px, 9999px, 44px, 0); }
+          25% { clip: rect(12px, 9999px, 69px, 0); }
+          30% { clip: rect(83px, 9999px, 33px, 0); }
+          35% { clip: rect(2px, 9999px, 7px, 0); }
+          40% { clip: rect(33px, 9999px, 90px, 0); }
+          45% { clip: rect(25px, 9999px, 53px, 0); }
+          50% { clip: rect(13px, 9999px, 82px, 0); }
+          55% { clip: rect(73px, 9999px, 29px, 0); }
+          60% { clip: rect(42px, 9999px, 44px, 0); }
+          100% { clip: rect(42px, 9999px, 44px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+          0% { clip: rect(2px, 9999px, 98px, 0); }
+          10% { clip: rect(48px, 9999px, 23px, 0); }
+          20% { clip: rect(39px, 9999px, 73px, 0); }
+          30% { clip: rect(89px, 9999px, 46px, 0); }
+          40% { clip: rect(19px, 9999px, 5px, 0); }
+          50% { clip: rect(69px, 9999px, 83px, 0); }
+          60% { clip: rect(2px, 9999px, 98px, 0); }
+          70% { clip: rect(48px, 9999px, 23px, 0); }
+          80% { clip: rect(39px, 9999px, 73px, 0); }
+          90% { clip: rect(89px, 9999px, 46px, 0); }
+          100% { clip: rect(19px, 9999px, 5px, 0); }
+        }
+
+        /* Typing cursor */
+        .typing::after {
+            content: '_';
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Glow effect */
+        .glow {
+            box-shadow: 0 0 40px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        /* Grid pattern */
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Button hover effects */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        /* Event card hover */
+        .event-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        /* Navbar blur on scroll */
+        .navbar-scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* FAQ accordion */
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="spotlight"></div>
+    <div class="grid-pattern fixed inset-0 z-0 opacity-30"></div>
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold">
+                    <span class="gradient-text">CATALYST</span><span class="text-purple-400">_</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition">About</a>
+                    <a href="#events" class="text-sm font-medium text-gray-300 hover:text-white transition">Events</a>
+                    <a href="#schedule" class="text-sm font-medium text-gray-300 hover:text-white transition">Schedule</a>
+                    <a href="#faq" class="text-sm font-medium text-gray-300 hover:text-white transition">FAQ</a>
+                    <a href="#register" class="btn-primary px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/50">
+                        Register
+                    </a>
+                </div>
+
+                <button class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-5xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full mb-8">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm font-mono tracking-widest">STATUS: ONLINE</span>
+                </div>
+
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tight glitch">
+                    CATALYST
+                </h1>
+
+                <p id="typing-text" class="text-xl md:text-2xl text-gray-300 mb-4 font-light font-mono h-8">
+                    
+                </p>
+
+                <p class="text-gray-400 max-w-2xl mx-auto mb-12">
+                    Join 500+ developers, designers, and tech enthusiasts for 3 days of intense competition, learning, and networking at India's premier tech festival.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                    <a href="#register" class="btn-primary px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full font-semibold text-lg hover:scale-105 transition-transform glow">
+                        Claim Your Spot
+                    </a>
+                    <a href="#events" class="px-8 py-4 glass rounded-full font-semibold text-lg hover:bg-white/10 transition">
+                        View Arenas →
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <div class="glass rounded-2xl p-6 hover:bg-white/5 transition">
+                        <div class="text-4xl font-bold gradient-text mb-2 font-mono">3</div>
+                        <div class="text-gray-400 text-sm font-mono tracking-wider">DAYS</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 hover:bg-white/5 transition">
+                        <div class="text-4xl font-bold gradient-text mb-2 font-mono">6</div>
+                        <div class="text-gray-400 text-sm font-mono tracking-wider">EVENTS</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 hover:bg-white/5 transition">
+                        <div class="text-4xl font-bold gradient-text mb-2 font-mono">500+</div>
+                        <div class="text-gray-400 text-sm font-mono tracking-wider">PARTICIPANTS</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 hover:bg-white/5 transition">
+                        <div class="text-4xl font-bold gradient-text mb-2 font-mono">₹5L</div>
+                        <div class="text-gray-400 text-sm font-mono tracking-wider">PRIZES</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 relative reveal">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <div class="text-sm font-semibold text-purple-400 mb-4 tracking-wider font-mono">ABOUT_CATALYST</div>
+                        <h2 class="text-4xl md:text-6xl font-bold mb-6">A Crucible for Innovators</h2>
+                        <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                            Catalyst isn't just a tech fest. It's a high-stakes proving ground for talent, a launchpad for disruptive ideas, and a celebration of what happens when brilliant minds converge.
+                        </p>
+                        <p class="text-gray-400 text-lg leading-relaxed">
+                            Whether you're battling in our coding arenas, architecting the next unicorn, or downloading knowledge from industry titans, Catalyst is where your trajectory shifts.
+                        </p>
+                    </div>
+                    <div class="relative">
+                        <div class="glass rounded-3xl p-8 space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16v4m-2-2h4m5 11v4m-2-2h4M9 21v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6m16-14h-6a2 2 0 00-2 2v6m0-8v-2a2 2 0 012-2h6a2 2 0 012 2v2"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-2">Compete & Conquer</h3>
+                                    <p class="text-gray-400 text-sm">Engage in high-stakes challenges across multiple domains and claim your share of the ₹5 lakh prize pool.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-600 to-red-600 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-2">Forge Connections</h3>
+                                    <p class="text-gray-400 text-sm">Network with 500+ peers, mentors, and industry leaders. Your next co-founder or employer is here.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3M7 7l2 2m8 8l2 2M7 17l2-2m8-8l2-2"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-2">Upgrade Your Arsenal</h3>
+                                    <p class="text-gray-400 text-sm">Attend workshops and talks by industry veterans to level-up your skills and expand your knowledge base.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="events" class="py-32 relative reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="text-sm font-semibold text-purple-400 mb-4 tracking-wider font-mono">ARENAS</div>
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Choose Your <span class="gradient-text">Battlefield</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Six unique challenges. One epic experience. Deploy your skills and dominate the competition.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                <div class="event-card glass rounded-3xl p-8 hover:bg-white/5 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Code Conquest</h3>
+                    <p class="text-gray-400 mb-4">Algorithmic warfare. Solve complex problems with optimal code under extreme time pressure.</p>
+                    <div class="flex items-center gap-2 text-sm text-purple-400">
+                        <span>View Details</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+                <div class="event-card glass rounded-3xl p-8 hover:bg-white/5 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-600 to-red-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">HackMatrix</h3>
+                    <p class="text-gray-400 mb-4">A 24-hour dev sprint. Assemble your squad, build a functional prototype, and pitch a world-changing product.</p>
+                    <div class="flex items-center gap-2 text-sm text-pink-400">
+                        <span>View Details</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+                <div class="event-card glass rounded-3xl p-8 hover:bg-white/5 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Design Dash</h3>
+                    <p class="text-gray-400 mb-4">The ultimate UI/UX battle. Create intuitive, visually stunning interfaces that solve a complex design challenge.</p>
+                    <div class="flex items-center gap-2 text-sm text-cyan-400">
+                        <span>View Details</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+                <div class="event-card glass rounded-3xl p-8 hover:bg-white/5 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-600 to-green-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.657 7.343A8 8 0 0118 14c-1.5 1.5-2 5-2 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.014 14 3 3 0 009.879 16.121z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">AI Innovate</h3>
+                    <p class="text-gray-400 mb-4">A neural network showdown. Train models, analyze data, and build intelligent systems that push the boundaries of AI.</p>
+                    <div class="flex items-center gap-2 text-sm text-emerald-400">
+                        <span>View Details</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+                <div class="event-card glass rounded-3xl p-8 hover:bg-white/5 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-600 to-red-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                       <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Capture The Flag</h3>
+                    <p class="text-gray-400 mb-4">Cybersecurity showdown. Hack, exploit, and defend your way through a gauntlet of security challenges.</p>
+                    <div class="flex items-center gap-2 text-sm text-orange-400">
+                        <span>View Details</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+                <div class="event-card glass rounded-3xl p-8 hover:bg-white/5 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-600 to-yellow-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Pitch Perfect</h3>
+                    <p class="text-gray-400 mb-4">The ultimate business pitch. Present your startup idea to a panel of investors and entrepreneurs.</p>
+                    <div class="flex items-center gap-2 text-sm text-amber-400">
+                        <span>View Details</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="schedule" class="py-32 relative reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="text-sm font-semibold text-purple-400 mb-4 tracking-wider font-mono">TIMELINE</div>
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Mission <span class="gradient-text-alt">Parameters</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Synchronize your clocks. Every moment is critical to mission success.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="relative pl-8 pb-12 border-l-2 border-purple-600/30">
+                    <div class="absolute left-0 top-0 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center font-bold font-mono">1</div>
+                    <div class="glass rounded-2xl p-8 ml-8 hover:bg-white/5 transition">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-2xl font-bold mb-2 md:mb-0">Day 1: Initiation</h3>
+                            <span class="text-sm text-purple-400 font-semibold font-mono">March 15, 2025</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[09:00]</span>
+                                <div><h4 class="font-semibold mb-1">Onboarding & Kit Distribution</h4><p class="text-sm text-gray-400">Authentication and gear acquisition.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[10:00]</span>
+                                <div><h4 class="font-semibold mb-1">System Initialization</h4><p class="text-sm text-gray-400">Welcome address and keynote protocol.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[12:00]</span>
+                                <div><h4 class="font-semibold mb-1">HackMatrix: Execute</h4><p class="text-sm text-gray-400">24-hour dev sprint commences.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[14:00]</span>
+                                <div><h4 class="font-semibold mb-1">Code Conquest: Round 1</h4><p class="text-sm text-gray-400">Competitive programming begins.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative pl-8 pb-12 border-l-2 border-pink-600/30">
+                    <div class="absolute left-0 top-0 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-pink-600 to-red-600 flex items-center justify-center font-bold font-mono">2</div>
+                    <div class="glass rounded-2xl p-8 ml-8 hover:bg-white/5 transition">
+                         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-2xl font-bold mb-2 md:mb-0">Day 2: The Grind</h3>
+                            <span class="text-sm text-pink-400 font-semibold font-mono">March 16, 2025</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[10:00]</span>
+                                <div><h4 class="font-semibold mb-1">Design Dash: Finals</h4><p class="text-sm text-gray-400">UI/UX competition intensifies.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[12:00]</span>
+                                <div><h4 class="font-semibold mb-1">HackMatrix: Mid-Point</h4><p class="text-sm text-gray-400">Deep work and mentor check-ins.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[15:00]</span>
+                                <div><h4 class="font-semibold mb-1">Knowledge Transfer Sessions</h4><p class="text-sm text-gray-400">Tech talks & workshops.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[18:00]</span>
+                                <div><h4 class="font-semibold mb-1">CTF & AI Innovate Commence</h4><p class="text-sm text-gray-400">Evening challenges deploy.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute left-0 top-0 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center font-bold font-mono">3</div>
+                    <div class="glass rounded-2xl p-8 ml-8 hover:bg-white/5 transition">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-2xl font-bold mb-2 md:mb-0">Day 3: The Finale</h3>
+                            <span class="text-sm text-cyan-400 font-semibold font-mono">March 17, 2025</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[12:00]</span>
+                                <div><h4 class="font-semibold mb-1">HackMatrix: Pencils Down</h4><p class="text-sm text-gray-400">Project submission deadline.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[14:00]</span>
+                                <div><h4 class="font-semibold mb-1">Project Evaluation</h4><p class="text-sm text-gray-400">Presentations to the judging panel.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[16:00]</span>
+                                <div><h4 class="font-semibold mb-1">Awards Ceremony</h4><p class="text-sm text-gray-400">Champions are crowned.</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">[17:00]</span>
+                                <div><h4 class="font-semibold mb-1">Closing Protocol</h4><p class="text-sm text-gray-400">See you at the next iteration.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-32 relative reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="text-sm font-semibold text-purple-400 mb-4 tracking-wider font-mono">SYSTEM_DOCS</div>
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Frequently Queried <span class="gradient-text">Data</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Your knowledge base for Catalyst. All essential information is logged here.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="faq-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-lg">Who has access clearance to participate?</span>
+                        <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 pb-6 pt-2">
+                        <p class="text-gray-400">Catalyst is open to all students, professionals, and tech enthusiasts. Whether you're a rookie or a veteran, there's a challenge for you. Some events may have specific prerequisites which will be listed in the event manifest.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-lg">Is there a registration cost?</span>
+                        <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 pb-6 pt-2">
+                        <p class="text-gray-400">Negative. Catalyst is open-source and free to attend. We believe in making high-value tech experiences accessible to everyone. Just complete the registration protocol and arrive ready to engage.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-lg">Can I participate in multiple events?</span>
+                        <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 pb-6 pt-2">
+                        <p class="text-gray-400">Affirmative. You can register for multiple events, provided their timelines do not conflict. We encourage participants to test their skills across various domains.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="py-32 relative reveal">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="glass-strong rounded-3xl p-12 md:p-16 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-indigo-600/20"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-4xl md:text-6xl font-bold mb-6">Initialize <span class="gradient-text">Revolution</span></h2>
+                        <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                            Join the innovators at Catalyst 2025. Registration is closing soon. Don't miss your chance to be part of the future.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                            <button class="btn-primary px-10 py-5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full font-bold text-lg hover:scale-105 transition-transform glow">
+                                Register Now [FREE]
+                            </button>
+                        </div>
+                        <p class="text-sm text-gray-400 font-mono">
+                            <span class="text-purple-400 font-semibold">SPOTS_LIMITED</span> // EVENT_START::MARCH_15_2025
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Codebusters. All rights reserved. // System Status: All Systems Nominal.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cursor Spotlight Effect
+        const spotlight = document.querySelector('.spotlight');
+        document.addEventListener('mousemove', (e) => {
+            spotlight.style.setProperty('--x', e.clientX + 'px');
+            spotlight.style.setProperty('--y', e.clientY + 'px');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // Scroll reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // FAQ Toggle
+        function toggleFAQ(button) {
+            const item = button.parentElement;
+            item.classList.toggle('active');
+            // Optional: Close other FAQs when one is opened
+            document.querySelectorAll('.faq-item').forEach(otherItem => {
+                if (otherItem !== item) otherItem.classList.remove('active');
+            });
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Typing effect
+        const typingTextElement = document.getElementById('typing-text');
+        const textToType = "> Where Innovation Meets Execution";
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < textToType.length) {
+                typingTextElement.textContent += textToType.charAt(charIndex);
+                typingTextElement.classList.add('typing');
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                typingTextElement.classList.remove('typing');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             setTimeout(type, 1000); // Start typing after a short delay
+        });
+    </script>
+</body>
+</html>
